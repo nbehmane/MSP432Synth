@@ -6,7 +6,7 @@
  */
 #include "spi.h"
 
-void setup_SPI()
+void setupSPI()
 {
     createOutputOdd(P5, BIT1); // CS bit
 

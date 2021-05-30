@@ -22,6 +22,7 @@ main.obj: C:/ti/ccs1020/ccs/ccs_base/arm/include/system_msp432p401r.h
 main.obj: ../lcd.h
 main.obj: ../delay.h
 main.obj: ../my_gpio.h
+main.obj: ../spi.h
 
 ../main.c: 
 C:/ti/ccs1020/ccs/ccs_base/arm/include/msp.h: 
@@ -45,3 +46,4 @@ C:/ti/ccs1020/ccs/ccs_base/arm/include/system_msp432p401r.h:
 ../lcd.h: 
 ../delay.h: 
 ../my_gpio.h: 
+../spi.h: 
