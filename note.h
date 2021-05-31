@@ -14,17 +14,4 @@ typedef struct Note {
     uint16_t duration;
 } Note;
 
-extern Note C4;
-extern Note Cs4;
-extern Note D4;
-extern Note Ds4;
-extern Note E4;
-extern Note F4;
-extern Note Fs4;
-extern Note G4;
-extern Note Gs4;
-extern Note A4;
-extern Note As4;
-extern Note B4;
-
 #endif /* NOTE_H_ */
