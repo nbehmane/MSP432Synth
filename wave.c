@@ -6,7 +6,8 @@
  */
 #include "wave.h"
 
-static uint8_t i = 0;
+static uint8_t index = 0;
+
 static uint16_t sin_list[100] =
 {    1861,1979,2096,2213,2328,2441,2552,2660,2765,2867,
      2964,3057,3145,3228,3305,3376,3442,3501,3553,3599,
@@ -24,8 +25,8 @@ static uint16_t sin_list[100] =
 uint16_t get_next(void)
 {
     uint16_t output = 0;
-    if (i > 100) i = 0;
-    output = sin_list[i];
-    i += 1;
+    if (index > 100) index = 0;
+    output = sin_list[index];
+    index += 1;
     return output;
 }

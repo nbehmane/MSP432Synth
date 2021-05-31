@@ -16,7 +16,7 @@ void main(void)
 	initLCD();
 	setupSPI();
 
-	writeChar('A');
+	writeString("FREQ", 5);
 	while(1)
 	{
 	    transmit(get_next());
