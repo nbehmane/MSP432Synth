@@ -16,6 +16,7 @@
 #define FREQ_24MHZ CS_CTL0_DCORSEL_4
 
 #define CLOCK_DIVISION 1
+#define NO_CLK_DIVISION 0
 #define DELAY 1000
 
 void setup_DCO(uint32_t freq, uint8_t div);

@@ -17,7 +17,8 @@ C_SRCS += \
 ../my_gpio.c \
 ../spi.c \
 ../startup_msp432p401r_ccs.c \
-../system_msp432p401r.c 
+../system_msp432p401r.c \
+../wave.c 
 
 C_DEPS += \
 ./dac.d \
@@ -28,7 +29,8 @@ C_DEPS += \
 ./my_gpio.d \
 ./spi.d \
 ./startup_msp432p401r_ccs.d \
-./system_msp432p401r.d 
+./system_msp432p401r.d \
+./wave.d 
 
 OBJS += \
 ./dac.obj \
@@ -39,7 +41,8 @@ OBJS += \
 ./my_gpio.obj \
 ./spi.obj \
 ./startup_msp432p401r_ccs.obj \
-./system_msp432p401r.obj 
+./system_msp432p401r.obj \
+./wave.obj 
 
 OBJS__QUOTED += \
 "dac.obj" \
@@ -50,7 +53,8 @@ OBJS__QUOTED += \
 "my_gpio.obj" \
 "spi.obj" \
 "startup_msp432p401r_ccs.obj" \
-"system_msp432p401r.obj" 
+"system_msp432p401r.obj" \
+"wave.obj" 
 
 C_DEPS__QUOTED += \
 "dac.d" \
@@ -61,7 +65,8 @@ C_DEPS__QUOTED += \
 "my_gpio.d" \
 "spi.d" \
 "startup_msp432p401r_ccs.d" \
-"system_msp432p401r.d" 
+"system_msp432p401r.d" \
+"wave.d" 
 
 C_SRCS__QUOTED += \
 "../dac.c" \
@@ -72,6 +77,7 @@ C_SRCS__QUOTED += \
 "../my_gpio.c" \
 "../spi.c" \
 "../startup_msp432p401r_ccs.c" \
-"../system_msp432p401r.c" 
+"../system_msp432p401r.c" \
+"../wave.c" 
 
 

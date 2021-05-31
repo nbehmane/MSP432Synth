@@ -19,6 +19,7 @@ ORDERED_OBJS += \
 "./spi.obj" \
 "./startup_msp432p401r_ccs.obj" \
 "./system_msp432p401r.obj" \
+"./wave.obj" \
 "../msp432p401r.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -162,8 +163,8 @@ Synthesizer.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "dac.obj" "delay.obj" "keypad.obj" "lcd.obj" "main.obj" "my_gpio.obj" "spi.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" 
-	-$(RM) "dac.d" "delay.d" "keypad.d" "lcd.d" "main.d" "my_gpio.d" "spi.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" 
+	-$(RM) "dac.obj" "delay.obj" "keypad.obj" "lcd.obj" "main.obj" "my_gpio.obj" "spi.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "wave.obj" 
+	-$(RM) "dac.d" "delay.d" "keypad.d" "lcd.d" "main.d" "my_gpio.d" "spi.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "wave.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
