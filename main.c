@@ -15,6 +15,12 @@ void TA0_0_IRQHandler(void){
     transmit(get_next());
 }
 
+void TA0_N_IRQHandler(void){
+    TIMER_A0->CCTL[1] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
+    printf("HIT\n");
+}
+
+
 void main(void)
 {
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
@@ -31,11 +37,24 @@ void main(void)
     TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
 //    SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk; //Enable sleep on exit from ISR
 
+    TIMER_A0->CCTL[1] = TIMER_A_CCTLN_CCIE; //TACCR1 interrupt enabled
+    TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
+
     TIMER_A0->CCR[0] = 271;
+    TIMER_A0->CCR[1] = 271;
 
     //Enable interrupts
     __enable_irq();
     NVIC->ISER[0] = 1 << ((TA0_0_IRQn) & 31);
+    NVIC->ISER[0] |= 1 << ((TA0_N_IRQn) & 31);
+
+    while (1)
+    {
+        if (detectKeyPress())
+        {
+            ;
+        }
+    }
 
 //    while(1)
 //	{
