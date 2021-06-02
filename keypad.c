@@ -54,7 +54,6 @@ uint8_t detectKeyPress(void)
         return 0;
 }
 
-
 /*
  * keyPress
  * Input: Row and Column pointers. These values will be updated with

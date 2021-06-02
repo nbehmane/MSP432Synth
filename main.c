@@ -3,7 +3,9 @@
 #include "spi.h"
 #include "delay.h"
 #include "wave.h"
-
+#include "keypad.h"
+#include "flag.h"
+#include "stdio.h"
 
 /**
  * main.c
@@ -11,16 +13,25 @@
 
 void TA0_0_IRQHandler(void){
     TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    transmit(get_next());
+    if (check_flag(BIT1))
+        transmit(get_next_sin_value());
 }
+
+void TA0_N_IRQHandler(void){
+    TIMER_A0->CCTL[1] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
+    if (detectKeyPress())
+        toggle_flag(BIT0);
+}
+
 
 void main(void)
 {
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
 	setup_DCO(FREQ_12MHZ, NO_CLK_DIVISION);
 	setupPorts();
-//	initLCD();
+ 	initLCD();
 	setupSPI();
+	setupKeypadPorts();
 
 	writeString("FREQ", 5);
 
@@ -29,11 +40,26 @@ void main(void)
     TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
 //    SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk; //Enable sleep on exit from ISR
 
+    TIMER_A0->CCTL[1] = TIMER_A_CCTLN_CCIE; //TACCR1 interrupt enabled
+    TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
+
     TIMER_A0->CCR[0] = 271;
+    TIMER_A0->CCR[1] = 100;
 
     //Enable interrupts
     __enable_irq();
     NVIC->ISER[0] = 1 << ((TA0_0_IRQn) & 31);
+    NVIC->ISER[0] |= 1 << ((TA0_N_IRQn) & 31);
+
+    while (1)
+    {
+        if (check_flag(BIT0) & 1)
+        {
+            toggle_flag(BIT0);
+            set_flag(BIT1);
+        }
+        clear_flag(BIT1);
+    }
 
 //    while(1)
 //	{

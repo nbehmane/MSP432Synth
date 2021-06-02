@@ -10,7 +10,7 @@
 #include "msp.h"
 
 
-uint16_t get_next(void);
+uint16_t get_next_sin_value(void);
 
 
 

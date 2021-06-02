@@ -11,10 +11,12 @@ CMD_SRCS += \
 C_SRCS += \
 ../dac.c \
 ../delay.c \
+../flag.c \
 ../keypad.c \
 ../lcd.c \
 ../main.c \
 ../my_gpio.c \
+../note.c \
 ../spi.c \
 ../startup_msp432p401r_ccs.c \
 ../system_msp432p401r.c \
@@ -23,10 +25,12 @@ C_SRCS += \
 C_DEPS += \
 ./dac.d \
 ./delay.d \
+./flag.d \
 ./keypad.d \
 ./lcd.d \
 ./main.d \
 ./my_gpio.d \
+./note.d \
 ./spi.d \
 ./startup_msp432p401r_ccs.d \
 ./system_msp432p401r.d \
@@ -35,10 +39,12 @@ C_DEPS += \
 OBJS += \
 ./dac.obj \
 ./delay.obj \
+./flag.obj \
 ./keypad.obj \
 ./lcd.obj \
 ./main.obj \
 ./my_gpio.obj \
+./note.obj \
 ./spi.obj \
 ./startup_msp432p401r_ccs.obj \
 ./system_msp432p401r.obj \
@@ -47,10 +53,12 @@ OBJS += \
 OBJS__QUOTED += \
 "dac.obj" \
 "delay.obj" \
+"flag.obj" \
 "keypad.obj" \
 "lcd.obj" \
 "main.obj" \
 "my_gpio.obj" \
+"note.obj" \
 "spi.obj" \
 "startup_msp432p401r_ccs.obj" \
 "system_msp432p401r.obj" \
@@ -59,10 +67,12 @@ OBJS__QUOTED += \
 C_DEPS__QUOTED += \
 "dac.d" \
 "delay.d" \
+"flag.d" \
 "keypad.d" \
 "lcd.d" \
 "main.d" \
 "my_gpio.d" \
+"note.d" \
 "spi.d" \
 "startup_msp432p401r_ccs.d" \
 "system_msp432p401r.d" \
@@ -71,10 +81,12 @@ C_DEPS__QUOTED += \
 C_SRCS__QUOTED += \
 "../dac.c" \
 "../delay.c" \
+"../flag.c" \
 "../keypad.c" \
 "../lcd.c" \
 "../main.c" \
 "../my_gpio.c" \
+"../note.c" \
 "../spi.c" \
 "../startup_msp432p401r_ccs.c" \
 "../system_msp432p401r.c" \
