@@ -1,0 +1,3 @@
+# MSP432Synth
+
+# Random comments and random readme before this is done...
