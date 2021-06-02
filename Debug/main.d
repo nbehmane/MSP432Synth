@@ -24,6 +24,9 @@ main.obj: ../delay.h
 main.obj: ../my_gpio.h
 main.obj: ../spi.h
 main.obj: ../wave.h
+main.obj: ../keypad.h
+main.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdio.h
+main.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdarg.h
 
 ../main.c: 
 C:/ti/ccs1020/ccs/ccs_base/arm/include/msp.h: 
@@ -49,3 +52,6 @@ C:/ti/ccs1020/ccs/ccs_base/arm/include/system_msp432p401r.h:
 ../my_gpio.h: 
 ../spi.h: 
 ../wave.h: 
+../keypad.h: 
+C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdio.h: 
+C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdarg.h: 
