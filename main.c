@@ -4,6 +4,7 @@
 #include "delay.h"
 #include "wave.h"
 #include "keypad.h"
+#include "flag.h"
 #include "stdio.h"
 
 /**
@@ -12,12 +13,14 @@
 
 void TA0_0_IRQHandler(void){
     TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    transmit(get_next());
+    if (check_flag(BIT1))
+        transmit(get_next_sin_value());
 }
 
 void TA0_N_IRQHandler(void){
     TIMER_A0->CCTL[1] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    printf("HIT\n");
+    if (detectKeyPress())
+        toggle_flag(BIT0);
 }
 
 
@@ -41,7 +44,7 @@ void main(void)
     TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
 
     TIMER_A0->CCR[0] = 271;
-    TIMER_A0->CCR[1] = 271;
+    TIMER_A0->CCR[1] = 100;
 
     //Enable interrupts
     __enable_irq();
@@ -50,10 +53,12 @@ void main(void)
 
     while (1)
     {
-        if (detectKeyPress())
+        if (check_flag(BIT0) & 1)
         {
-            ;
+            toggle_flag(BIT0);
+            set_flag(BIT1);
         }
+        clear_flag(BIT1);
     }
 
 //    while(1)

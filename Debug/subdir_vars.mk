@@ -11,6 +11,7 @@ CMD_SRCS += \
 C_SRCS += \
 ../dac.c \
 ../delay.c \
+../flag.c \
 ../keypad.c \
 ../lcd.c \
 ../main.c \
@@ -24,6 +25,7 @@ C_SRCS += \
 C_DEPS += \
 ./dac.d \
 ./delay.d \
+./flag.d \
 ./keypad.d \
 ./lcd.d \
 ./main.d \
@@ -37,6 +39,7 @@ C_DEPS += \
 OBJS += \
 ./dac.obj \
 ./delay.obj \
+./flag.obj \
 ./keypad.obj \
 ./lcd.obj \
 ./main.obj \
@@ -50,6 +53,7 @@ OBJS += \
 OBJS__QUOTED += \
 "dac.obj" \
 "delay.obj" \
+"flag.obj" \
 "keypad.obj" \
 "lcd.obj" \
 "main.obj" \
@@ -63,6 +67,7 @@ OBJS__QUOTED += \
 C_DEPS__QUOTED += \
 "dac.d" \
 "delay.d" \
+"flag.d" \
 "keypad.d" \
 "lcd.d" \
 "main.d" \
@@ -76,6 +81,7 @@ C_DEPS__QUOTED += \
 C_SRCS__QUOTED += \
 "../dac.c" \
 "../delay.c" \
+"../flag.c" \
 "../keypad.c" \
 "../lcd.c" \
 "../main.c" \
