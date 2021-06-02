@@ -10,20 +10,6 @@
 /**
  * main.c
  */
-
-void TA0_0_IRQHandler(void){
-    TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    if (check_flag(BIT1))
-        transmit(get_next_sin_value());
-}
-
-void TA0_N_IRQHandler(void){
-    TIMER_A0->CCTL[1] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    if (detectKeyPress())
-        toggle_flag(BIT0);
-}
-
-
 void main(void)
 {
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
@@ -94,4 +80,14 @@ void main(void)
 //	}
 }
 
+void TA0_0_IRQHandler(void){
+    TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
+    if (check_flag(BIT1))
+        transmit(get_next_sin_value());
+}
 
+void TA0_N_IRQHandler(void){
+    TIMER_A0->CCTL[1] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
+    if (detectKeyPress())
+        toggle_flag(BIT0);
+}
