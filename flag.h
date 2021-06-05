@@ -15,3 +15,4 @@ uint8_t check_flag(uint8_t bit);
 void toggle_flag(uint8_t bit);
 
 #endif /* FLAG_H_ */
+

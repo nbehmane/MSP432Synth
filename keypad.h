@@ -25,7 +25,7 @@
 void setupKeypadPorts(void);
 uint8_t detectKeyPress(void);
 void keyPress(uint8_t *r, uint8_t *c);
-char getChar(uint8_t row, uint8_t col);
+uint8_t getChar(uint8_t row, uint8_t col);
 void debounce(void);
 
 

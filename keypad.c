@@ -91,48 +91,48 @@ void keyPress(uint8_t *r, uint8_t *c)
  * Input: Row and Column value pretaining to a specific key
  * Output: The ascii character value that coincides with a Row and Column value
  */
-char getChar(uint8_t row, uint8_t col)
+uint8_t getChar(uint8_t row, uint8_t col)
 {
     switch(row)
     {
     case ROW0:
         if (col == COL0)
-            return '1';
-        if (col == COL1)
-            return '2';
-        if (col == COL2)
-            return '3';
-        if (col == COL3)
-            return 'A';
+            return 3; // 1
+        else if (col == COL1)
+            return 4; // 2
+        else if (col == COL2)
+            return 5; // 3
+        else if (col == COL3)
+            return 6; // A
         break;
     case ROW1:
         if (col == COL0)
-            return '4';
+            return 7;  // 4
         if (col == COL1)
-            return '5';
+            return 8;  // 5
         if (col == COL2)
-            return '6';
+            return 9;  // 6
         if (col == COL3)
-            return 'B';
+            return 10; // B
     case ROW2:
         if (col == COL0)
-            return '7';
+            return 11; // 7
         if (col == COL1)
-            return '8';
+            return 12; // 8
         if (col == COL2)
-            return '9';
+            return 13; // 9
         if (col == COL3)
-            return 'C';
+            return 14; //  C
     case ROW3:
         if (col == COL0)
-            return '*';
+            return '*'; // *
         if (col == COL1)
-            return '0';
+            return 16; // 0
         if (col == COL2)
-            return '#';
+            return 17;  // #
         if (col == COL3)
-            return 'D';
+            return 18; //D
     }
-    return '\0';
+    return 0;
 }
 

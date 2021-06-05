@@ -5,7 +5,12 @@
 #include "wave.h"
 #include "keypad.h"
 #include "flag.h"
+#include "my_gpio.h"
+#include "note.h"
 #include "stdio.h"
+#include "stdlib.h"
+#define RECORDING (P3->IN & BIT0)
+#define NOTE_LEN 100
 
 /**
  * main.c
@@ -13,81 +18,76 @@
 void main(void)
 {
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
-	setup_DCO(FREQ_12MHZ, NO_CLK_DIVISION);
+	createInputOdd(P3, BIT0, 0);
+    setup_DCO(FREQ_24MHZ, NO_CLK_DIVISION);
+
+    uint8_t r = 0;
+    uint8_t c = 0;
+    uint8_t period = 0;
+    uint8_t still_pressed = 0;
+    Note * notes = init_notes(NOTE_LEN);
+    uint8_t note_index = 0;
+    uint8_t playback_index = 0;
+    uint32_t playback_duration = 0;
+
+	setupKeypadPorts();
 	setupPorts();
  	initLCD();
 	setupSPI();
-	setupKeypadPorts();
+	// Initialize a single note in Notes.
 
-	writeString("FREQ", 5);
+	writeString("FREQ", 4);
 
-	//Set up TIMER_A0 interrupts
-    TIMER_A0->CCTL[0] = TIMER_A_CCTLN_CCIE; //TACCR0 interrupt enabled
-    TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
-//    SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk; //Enable sleep on exit from ISR
-
-    TIMER_A0->CCTL[1] = TIMER_A_CCTLN_CCIE; //TACCR1 interrupt enabled
-    TIMER_A0->CTL = TIMER_A_CTL_SSEL__SMCLK | TIMER_A_CTL_MC__UP;
-
-    TIMER_A0->CCR[0] = 271;
-    TIMER_A0->CCR[1] = 100;
-
-    //Enable interrupts
-    __enable_irq();
-    NVIC->ISER[0] = 1 << ((TA0_0_IRQn) & 31);
-    NVIC->ISER[0] |= 1 << ((TA0_N_IRQn) & 31);
 
     while (1)
     {
-        if (check_flag(BIT0) & 1)
+        if ((still_pressed = detectKeyPress()))
         {
-            toggle_flag(BIT0);
-            set_flag(BIT1);
+            keyPress(&r, &c);
+            period = getChar(r, c);
+
+            if (period == '*')
+            {
+
+                for (playback_index = 0; playback_index < NOTE_LEN; playback_index++)
+                {
+                    for (playback_duration = 0;
+                         playback_duration < notes[playback_index].duration;
+                         playback_duration++)
+                    {
+                        delay_us(notes[playback_index].period);
+                        transmit(get_next_sin_value());
+                    }
+                    delay_us(50);
+                    transmit(0);
+                }
+                free(notes);
+                notes = init_notes(NOTE_LEN);
+                note_index = 0;
+                period = 0;
+
+            }
+            delay_us(period);
+            transmit(get_next_sin_value());
+
+            if (RECORDING & period != '*')
+            {
+                notes[note_index].period = period;
+                notes[note_index].duration += 2;
+            }
+            clear_flag(BIT0);
+
         }
-        clear_flag(BIT1);
+        else if (still_pressed == 0 & !(check_flag(BIT0)))
+        {
+            if (note_index > 100 & period != '*')
+                note_index = 0;
+            else if (period != '*')
+                note_index += 1;
+            set_flag(BIT0);
+        }
+
     }
-
-//    while(1)
-//	{
-//        //PSEUDOCODE
-//        switch(buttonPressed){
-//            case "C4":
-//                TIMER_A0->CCR[0] = 455;
-//            case "C#4":
-//                TIMER_A0->CCR[0] = 430;
-//            case "D4":
-//                TIMER_A0->CCR[0] = 405;
-//            case "D#4":
-//                TIMER_A0->CCR[0] = 383;
-//            case "E4":
-//                TIMER_A0->CCR[0] = 361;
-//            case "F4":
-//                TIMER_A0->CCR[0] = 341;
-//            case "F#4":
-//                TIMER_A0->CCR[0] = 322;
-//            case "G4":
-//                TIMER_A0->CCR[0] = 304;
-//            case "G#4":
-//                TIMER_A0->CCR[0] = 287;
-//            case "A4":
-//                TIMER_A0->CCR[0] = 271;
-//            case "A#4":
-//                TIMER_A0->CCR[0] = 255;
-//            case "B4":
-//                TIMER_A0->CCR[0] = 240;
-//        }
-//
-//	}
 }
 
-void TA0_0_IRQHandler(void){
-    TIMER_A0->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    if (check_flag(BIT1))
-        transmit(get_next_sin_value());
-}
 
-void TA0_N_IRQHandler(void){
-    TIMER_A0->CCTL[1] &= ~TIMER_A_CCTLN_CCIFG; //no interrupt pending
-    if (detectKeyPress())
-        toggle_flag(BIT0);
-}

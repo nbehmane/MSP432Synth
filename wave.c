@@ -25,7 +25,7 @@ static uint16_t sin_list[100] =
 uint16_t get_next_sin_value(void)
 {
     uint16_t output = 0;
-    if (index > 100) index = 0;
+    if (index > 99) index = 0;
     output = sin_list[index];
     index += 1;
     return output;

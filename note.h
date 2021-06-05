@@ -9,9 +9,9 @@
 #define NOTE_H_
 
 typedef struct Note{
-    char name[4]; //Ex. {'C', '#', '4', '\0'}
-    uint16_t freq;
-    uint16_t duration;
+    uint16_t period;
+    uint32_t duration;
 } Note;
 
+Note * init_notes(uint16_t len);
 #endif /* NOTE_H_ */
