@@ -8,7 +8,7 @@
 
 void recording(uint8_t period, Note *notes, uint8_t note_index)
 {
-    if (RECORDING & period != '*')
+    if (RECORDING & period != PLAYBACK_BTN)
     {
         notes[note_index].period = period;
         notes[note_index].duration += 2;

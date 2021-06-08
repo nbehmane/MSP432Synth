@@ -19,7 +19,7 @@
 #define RECORDING (P3->IN & BIT0)
 #define NOTE_LEN 100
 #define BREAK_NOTE 1000
-#define RECORD_BTN ('*')
+#define PLAYBACK_BTN ('*')
 #define YES 1
 #define NO 0
 
