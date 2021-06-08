@@ -18,6 +18,7 @@ ORDERED_OBJS += \
 "./main.obj" \
 "./my_gpio.obj" \
 "./note.obj" \
+"./recording.obj" \
 "./spi.obj" \
 "./startup_msp432p401r_ccs.obj" \
 "./system_msp432p401r.obj" \
@@ -165,8 +166,8 @@ Synthesizer.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "dac.obj" "delay.obj" "flag.obj" "keypad.obj" "lcd.obj" "main.obj" "my_gpio.obj" "note.obj" "spi.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "wave.obj" 
-	-$(RM) "dac.d" "delay.d" "flag.d" "keypad.d" "lcd.d" "main.d" "my_gpio.d" "note.d" "spi.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "wave.d" 
+	-$(RM) "dac.obj" "delay.obj" "flag.obj" "keypad.obj" "lcd.obj" "main.obj" "my_gpio.obj" "note.obj" "recording.obj" "spi.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "wave.obj" 
+	-$(RM) "dac.d" "delay.d" "flag.d" "keypad.d" "lcd.d" "main.d" "my_gpio.d" "note.d" "recording.d" "spi.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "wave.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
