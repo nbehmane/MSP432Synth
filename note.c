@@ -7,9 +7,12 @@
 #include "msp.h"
 #include "note.h"
 #include "stdlib.h"
+
+
 Note * init_notes(uint16_t len)
 {
     uint16_t i = 0;
+    // Allocate enough memory for len number of notes.
     Note * notes = malloc(len * sizeof(Note));
     for (; i < len; i++)
     {
