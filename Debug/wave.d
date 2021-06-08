@@ -20,6 +20,10 @@ wave.obj: C:/ti/ccs1020/ccs/ccs_base/arm/include/CMSIS/core_cm4.h
 wave.obj: C:/ti/ccs1020/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 wave.obj: C:/ti/ccs1020/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 wave.obj: C:/ti/ccs1020/ccs/ccs_base/arm/include/system_msp432p401r.h
+wave.obj: ../keypad.h
+wave.obj: ../my_gpio.h
+wave.obj: ../lcd.h
+wave.obj: ../delay.h
 
 ../wave.c: 
 ../wave.h: 
@@ -41,3 +45,7 @@ C:/ti/ccs1020/ccs/ccs_base/arm/include/CMSIS/core_cm4.h:
 C:/ti/ccs1020/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h: 
 C:/ti/ccs1020/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h: 
 C:/ti/ccs1020/ccs/ccs_base/arm/include/system_msp432p401r.h: 
+../keypad.h: 
+../my_gpio.h: 
+../lcd.h: 
+../delay.h: 

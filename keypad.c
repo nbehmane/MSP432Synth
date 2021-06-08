@@ -129,7 +129,7 @@ uint8_t getChar(uint8_t row, uint8_t col)
         if (col == COL1)
             return 16; // 0
         if (col == COL2)
-            return 17;  // #
+            return '#';  // #
         if (col == COL3)
             return 18; //D
     }

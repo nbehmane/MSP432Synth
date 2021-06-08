@@ -10,7 +10,8 @@
 #include "msp.h"
 #include "delay.h"
 #include "my_gpio.h"
-
+#define SECONDLINE 0x40
+#define FIRSTLINE 0x0
 #define CLEARLCD 0x01
 #define DISPOFF  0x08
 #define ENTRY    0x06

@@ -10,7 +10,7 @@
 
 static uint8_t index = 0;
 
-/*static uint16_t sin_list[100] =
+static uint16_t sin_list[100] =
 {    1861,1979,2096,2213,2328,2441,2552,2660,2765,2867,
      2964,3057,3145,3228,3305,3376,3442,3501,3553,3599,
      3638,3669,3693,3710,3719,3721,3716,3703,3682,3654,
@@ -21,9 +21,9 @@ static uint8_t index = 0;
      5,0,2,11,28,52,83,122,168,220,279,345,416,493,576,
      664,757,854,956,1061,1169,1280,1393,1508,1625,1742,
      1861
-};*/
-/*
-static uint16_t sin_list[100] = {1861,1898,1936,1974,2012,2050,2088,2126,2164,2202,
+};
+
+static uint16_t saw_tooth[100] = {1861,1898,1936,1974,2012,2050,2088,2126,2164,2202,
                          2240,2278,2316,2354,2392,2430,2468,2506,2544,2582,
                          2620,2658,2696,2734,2772,2810,2848,2886,2924,2962,
                          3000,3038,3076,3114,3152,3190,3228,3266,3304,3342,
@@ -33,8 +33,8 @@ static uint16_t sin_list[100] = {1861,1898,1936,1974,2012,2050,2088,2126,2164,22
                          987,1025,1063,1101,1139,1177,1215,1253,1291,1329,1367,
                          1405,1443,1481,1519,1557,1595,1633,1671,1709,1747,
                          1785,1823,1861};
-*/
-static uint16_t sin_list[100] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+static uint16_t square[100] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                 4000,4000,4000, 4000, 4000, 4000, 4000, 4000,4000,4000,
                                 4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,
@@ -43,11 +43,41 @@ static uint16_t sin_list[100] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                 4000,4000,4000,4000,4000,4000,4000};
 
 
-uint16_t get_next_sin_value(void)
+uint16_t get_next_value(uint8_t wave_select)
 {
     uint16_t output = 0;
     if (index > 99) index = 0;
-    output = sin_list[index];
+    if (wave_select == 0)
+        output = sin_list[index];
+    else if (wave_select == 1)
+        output = saw_tooth[index];
+    else
+        output = square[index];
     index += 1;
     return output;
+}
+
+void change_wave(uint8_t *wave_select)
+{
+    writeStringOffset("                 ", 17, FIRSTLINE);
+    if (*wave_select == 2)
+        *wave_select = 0;
+    else
+        *wave_select += 1;
+    switch(*wave_select)
+    {
+    case 0:
+        writeStringOffset("SINE", 4, FIRSTLINE);
+        break;
+    case 1:
+        writeStringOffset("SAW TOOTH", 9, FIRSTLINE);
+        break;
+    case 2:
+        writeStringOffset("SQUARE", 6, FIRSTLINE);
+        break;
+    default:
+        writeStringOffset("NO WAVE", 5, FIRSTLINE);
+    }
+    debounce();
+    debounce();
 }

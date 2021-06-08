@@ -24,9 +24,11 @@ recording.obj: ../flag.h
 recording.obj: ../delay.h
 recording.obj: ../note.h
 recording.obj: ../wave.h
+recording.obj: ../keypad.h
+recording.obj: ../my_gpio.h
+recording.obj: ../lcd.h
 recording.obj: C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdlib.h
 recording.obj: ../spi.h
-recording.obj: ../my_gpio.h
 
 ../recording.c: 
 ../recording.h: 
@@ -52,6 +54,8 @@ C:/ti/ccs1020/ccs/ccs_base/arm/include/system_msp432p401r.h:
 ../delay.h: 
 ../note.h: 
 ../wave.h: 
+../keypad.h: 
+../my_gpio.h: 
+../lcd.h: 
 C:/ti/ccs1020/ccs/tools/compiler/ti-cgt-arm_20.2.2.LTS/include/stdlib.h: 
 ../spi.h: 
-../my_gpio.h: 
